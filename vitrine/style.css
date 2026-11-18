@@ -1,0 +1,655 @@
+/* Page de présentation d'Ellesia (pré-bêta).
+ *
+ * Pensée pour un téléphone d'abord, et légère : une testeuse l'ouvre souvent
+ * en 3G. Aucune bibliothèque, aucune police tierce : les deux polices sont
+ * celles de l'application, servies par le même domaine.
+ */
+
+@font-face {
+  font-family: 'Fraunces';
+  src: url('../polices/Fraunces.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Jakarta';
+  src: url('../polices/PlusJakartaSans.ttf') format('truetype');
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+:root {
+  --prune: #6b2d5c;
+  --prune-profond: #4a1c40;
+  --corail: #f2766b;
+  --ocre: #e8a93b;
+  --creme: #fff8f2;
+  --rose: #f9e4e1;
+  --encre: #2a1f2d;
+  --muet: #6e6272;
+  --nuit: #17121a;
+  --nuit-surface: #241c27;
+  --nuit-douce: #33273a;
+  --nuit-texte: #f5edf2;
+  --nuit-muet: #b5a9b8;
+  --nuit-prune: #d9a3c9;
+  --nuit-corail: #f48a80;
+  --nuit-ocre: #f0bc5e;
+
+  /* Jetons du thème courant. */
+  --fond: var(--creme);
+  --surface: #ffffff;
+  --douce: var(--rose);
+  --texte: var(--encre);
+  --texte-muet: var(--muet);
+  --accent: var(--prune);
+  --ligne: rgba(42, 31, 45, 0.12);
+
+  --courbe: cubic-bezier(0.22, 0.9, 0.3, 1);
+  --marge: clamp(20px, 5vw, 56px);
+  /* Une seule colonne de 1 040 px pour toute la page : en-tête, accueil et
+   * sections partent du même bord. Le pourcentage se calcule là où la
+   * variable sert, sur la largeur du bloc. */
+  --gouttiere: max(var(--marge), (100% - 1040px) / 2);
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fond: var(--nuit);
+    --surface: var(--nuit-surface);
+    --douce: var(--nuit-douce);
+    --texte: var(--nuit-texte);
+    --texte-muet: var(--nuit-muet);
+    --accent: var(--nuit-prune);
+    --ligne: rgba(245, 237, 242, 0.12);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+/* Un bloc masqué le reste, même s'il porte son propre display (flex, grid). */
+[hidden] {
+  display: none !important;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--texte);
+  font-family: 'Jakarta', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.cache {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 620;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+h2 {
+  font-size: clamp(32px, 7vw, 54px);
+}
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.surtitre {
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--corail);
+}
+
+a {
+  color: inherit;
+}
+:focus-visible {
+  outline: 3px solid var(--ocre);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ------------------------------------------------------------ En-tête */
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px var(--gouttiere);
+  background: color-mix(in srgb, var(--prune-profond) 88%, transparent);
+  backdrop-filter: blur(12px);
+  color: var(--creme);
+}
+.marque {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  text-decoration: none;
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 650;
+  font-size: 21px;
+}
+.badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--prune), var(--corail));
+  color: var(--creme);
+  flex: none;
+}
+.badge svg {
+  width: 30px;
+  height: 30px;
+}
+.pastille {
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: var(--ocre);
+  color: var(--encre);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* -------------------------------------------------------------- Accueil */
+.heros {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  gap: 48px;
+  padding: 56px var(--gouttiere) 72px;
+  color: var(--creme);
+  background:
+    radial-gradient(circle at 100% 100%, rgba(242, 118, 107, 0.55) 0%, rgba(242, 118, 107, 0) 45%),
+    linear-gradient(160deg, var(--prune-profond) 0%, var(--prune) 60%, #7e335d 100%);
+}
+.heros::after {
+  /* Rayures du motif textile, en bas de la bande. */
+  content: '';
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 56px;
+  background: repeating-linear-gradient(
+    135deg,
+    rgba(255, 248, 242, 0.07) 0 12px,
+    transparent 12px 24px
+  );
+  pointer-events: none;
+}
+/* Hors de la grille : les anneaux ne sont qu'un décor derrière le contenu. */
+.anneaux {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.anneaux span {
+  position: absolute;
+  border-radius: 50%;
+  border: 18px solid rgba(255, 248, 242, 0.06);
+  pointer-events: none;
+  animation: flotter 14s var(--courbe) infinite alternate;
+}
+.anneaux span:first-child {
+  width: 520px;
+  height: 520px;
+  right: -240px;
+  top: -200px;
+}
+.anneaux span:last-child {
+  width: 280px;
+  height: 280px;
+  right: -80px;
+  top: -40px;
+  border-width: 12px;
+  animation-delay: -6s;
+}
+@keyframes flotter {
+  to {
+    transform: translate(-18px, 22px) rotate(8deg);
+  }
+}
+
+.heros-texte {
+  position: relative;
+  max-width: 620px;
+}
+.heros .surtitre {
+  color: var(--ocre);
+}
+.heros h1 {
+  font-size: clamp(46px, 12vw, 86px);
+}
+.chapeau {
+  margin-top: 20px;
+  font-size: 19px;
+  color: rgba(255, 248, 242, 0.9);
+  max-width: 540px;
+}
+
+.telechargement {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.bouton {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 14px 28px;
+  border-radius: 999px;
+  background: var(--creme);
+  color: var(--prune);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 750;
+  box-shadow: 0 12px 30px rgba(23, 18, 26, 0.28);
+  transition:
+    transform 200ms var(--courbe),
+    box-shadow 200ms var(--courbe);
+}
+.bouton svg {
+  width: 24px;
+  height: 24px;
+}
+.bouton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(23, 18, 26, 0.34);
+}
+.bouton:active {
+  transform: translateY(0);
+}
+.bouton[aria-disabled='true'] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+.details {
+  font-size: 14px;
+  color: rgba(255, 248, 242, 0.82);
+}
+.details a {
+  font-weight: 700;
+}
+.iphone {
+  margin-top: 28px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: rgba(255, 248, 242, 0.12);
+  font-size: 16px;
+}
+
+/* Aperçu de l'écran de démarrage de l'application. */
+.telephone {
+  position: relative;
+  justify-self: center;
+  width: min(260px, 70vw);
+  aspect-ratio: 9 / 18.5;
+  padding: 12px;
+  border-radius: 40px;
+  background: #120d14;
+  box-shadow:
+    0 30px 70px rgba(23, 18, 26, 0.5),
+    inset 0 0 0 2px rgba(255, 248, 242, 0.08);
+  transform: perspective(1200px) rotateY(-10deg) rotateX(4deg);
+  animation: respirer 7s var(--courbe) infinite alternate;
+}
+@keyframes respirer {
+  to {
+    transform: perspective(1200px) rotateY(-4deg) rotateX(2deg) translateY(-8px);
+  }
+}
+.ecran {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(135deg, var(--prune) 0%, var(--corail) 100%);
+  color: var(--creme);
+}
+.anneau-ecran {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  right: -110px;
+  top: -90px;
+  border-radius: 50%;
+  border: 16px solid rgba(255, 248, 242, 0.1);
+}
+.monogramme-ecran {
+  width: 92px;
+  height: 92px;
+}
+.nom-ecran {
+  font-family: 'Fraunces', Georgia, serif;
+  font-weight: 650;
+  font-size: 34px;
+}
+.slogan-ecran {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* --------------------------------------------------- Sections communes */
+main > section:not(.heros) {
+  padding: 72px var(--gouttiere);
+}
+
+/* ---------------------------------------------------------------- L'idée */
+.idee h2 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.constats {
+  list-style: none;
+  padding: 0;
+  margin-top: 40px;
+}
+.constats li {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 8px;
+  align-items: baseline;
+  padding: 22px 0;
+  border-top: 1px solid var(--ligne);
+}
+.constats li:last-child {
+  border-bottom: 1px solid var(--ligne);
+}
+.constats span {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 34px;
+  font-weight: 600;
+  color: var(--corail);
+}
+.constats p {
+  font-size: 19px;
+}
+.conclusion {
+  margin-top: 36px;
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: clamp(22px, 4.6vw, 30px);
+  font-weight: 520;
+  line-height: 1.3;
+  color: var(--accent);
+}
+
+/* ------------------------------------------------------ Anonymat vérifié */
+.anonymat {
+  background: var(--douce);
+}
+.anonymat-titre h2 span {
+  display: block;
+  color: var(--corail);
+}
+.anonymat-corps > p {
+  margin-top: 24px;
+  font-size: 19px;
+  max-width: 680px;
+}
+.atouts {
+  list-style: none;
+  padding: 0;
+  margin-top: 32px;
+  display: grid;
+  gap: 14px;
+}
+.atouts li {
+  padding: 20px 22px;
+  border-radius: 20px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.atouts strong {
+  font-size: 18px;
+}
+.atouts span,
+.garanties span,
+.etapes span,
+.liste-espaces dd {
+  color: var(--texte-muet);
+}
+
+/* ------------------------------------------------------- Ce qui t'attend */
+.themes {
+  list-style: none;
+  padding: 0;
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.themes li {
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: var(--douce);
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 650;
+}
+.themes li.fort {
+  background: var(--prune);
+  color: var(--creme);
+}
+.themes li.ocre {
+  background: var(--ocre);
+  color: var(--encre);
+}
+.liste-espaces {
+  margin-top: 32px;
+}
+.liste-espaces div {
+  display: grid;
+  gap: 4px;
+  padding: 18px 0;
+  border-top: 1px solid var(--ligne);
+}
+.liste-espaces div:last-child {
+  border-bottom: 1px solid var(--ligne);
+}
+.liste-espaces dt {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 23px;
+  font-weight: 620;
+  color: var(--accent);
+}
+.liste-espaces dd {
+  margin: 0;
+  font-size: 17px;
+}
+
+/* -------------------------------------------------------------- Sécurité */
+.securite {
+  background: var(--nuit);
+  color: var(--nuit-texte);
+}
+.securite .surtitre {
+  color: var(--nuit-corail);
+}
+.garanties {
+  list-style: none;
+  padding: 0;
+  margin-top: 36px;
+  display: grid;
+  gap: 14px;
+}
+.garanties li {
+  padding: 20px 22px;
+  border-radius: 20px;
+  background: var(--nuit-surface);
+  border: 1px solid var(--nuit-douce);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.garanties li:first-child {
+  background: var(--nuit-douce);
+  border-color: transparent;
+}
+.garanties strong {
+  font-size: 18px;
+  color: var(--nuit-texte);
+}
+.securite .garanties span {
+  color: var(--nuit-muet);
+}
+
+/* ------------------------------------------------------------- Installer */
+.installer {
+  background: linear-gradient(160deg, var(--prune-profond) 0%, var(--prune) 100%);
+  color: var(--creme);
+}
+.installer .surtitre {
+  color: var(--ocre);
+}
+.etapes {
+  list-style: none;
+  padding: 0;
+  margin-top: 36px;
+  counter-reset: etape;
+  display: grid;
+  gap: 22px;
+}
+.etapes li {
+  counter-increment: etape;
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  column-gap: 16px;
+  row-gap: 4px;
+}
+.etapes li::before {
+  content: counter(etape);
+  grid-row: span 2;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 248, 242, 0.14);
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 24px;
+  font-weight: 650;
+}
+.etapes strong {
+  font-size: 19px;
+}
+.installer .etapes span {
+  color: rgba(255, 248, 242, 0.82);
+}
+.installer .telechargement {
+  margin-top: 40px;
+}
+.note {
+  margin-top: 32px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: rgba(255, 248, 242, 0.1);
+  font-size: 15px;
+  color: rgba(255, 248, 242, 0.88);
+}
+
+/* ------------------------------------------------------------------- Pied */
+.pied {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 48px var(--marge) 56px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--texte-muet);
+}
+.pied-slogan {
+  font-family: 'Fraunces', Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* ---------------------------------------------------- Apparition douce
+ * Rien n'est masqué par défaut. Seules les sections encore sous l'écran au
+ * chargement reçoivent .a-venir, retirée dès qu'on y arrive : si le script ne
+ * tourne pas, ou mal, tout reste lisible. */
+.apparait {
+  transition:
+    opacity 420ms var(--courbe),
+    transform 420ms var(--courbe);
+}
+.apparait.a-venir {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+/* --------------------------------------------------------- Écrans larges */
+@media (min-width: 860px) {
+  .heros {
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    padding-top: 88px;
+    padding-bottom: 104px;
+  }
+  .heros-texte {
+    max-width: none;
+  }
+  .atouts,
+  .garanties {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .liste-espaces div {
+    grid-template-columns: 260px 1fr;
+    align-items: baseline;
+  }
+}
+
+/* ------------------------------------------- Moins de mouvement demandé */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .anneaux span,
+  .telephone {
+    animation: none;
+  }
+  .telephone {
+    transform: none;
+  }
+  .bouton {
+    transition: none;
+  }
+  .apparait,
+  .apparait.a-venir {
+    transform: none;
+    transition: opacity 160ms linear;
+  }
+}

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ellesia, ici c’est entre Elles</title>
+  <meta name="description" content="Ellesia, le réseau social réservé aux femmes, vérifié et pensé pour leur sécurité. Pré-bêta privée au Bénin.">
+  <!-- Pré-bêta privée : la page n'a pas à apparaître dans les moteurs de recherche. -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#6B2D5C">
+  <!-- Hébergée sur GitHub Pages, qui ne laisse pas régler les en-têtes : la
+       politique de sécurité est donc ici. Rien d'extérieur ne se charge, et
+       Drive ne voit pas d'où vient la demande de téléchargement. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <!-- Chemins relatifs : la page vit sous une sous-adresse (/ellesia-app/). -->
+  <link rel="icon" href="vitrine/icone.svg" type="image/svg+xml">
+  <link rel="preload" href="polices/Fraunces.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="polices/PlusJakartaSans.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="vitrine/style.css">
+  <script src="vitrine/page.js" defer></script>
+</head>
+<body>
+
+<svg width="0" height="0" class="cache" aria-hidden="true">
+  <defs>
+    <symbol id="monogramme" viewBox="0 0 120 120">
+      <path d="M84 24C46 24 46 60 84 60" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+      <path d="M84 60C46 60 46 96 84 96" fill="none" stroke="currentColor" stroke-opacity="0.82" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="60" cy="60" r="5" fill="#E8A93B"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="entete">
+  <a class="marque" href="#haut" aria-label="Ellesia, haut de la page">
+    <span class="badge"><svg aria-hidden="true"><use href="#monogramme"/></svg></span>
+    <span>Ellesia</span>
+  </a>
+  <span class="pastille">Pré-bêta privée</span>
+</header>
+
+<main id="haut">
+
+  <!-- ============================================================ Accueil -->
+  <section class="heros">
+    <div class="anneaux" aria-hidden="true"><span></span><span></span></div>
+    <div class="heros-texte">
+      <p class="surtitre">Réseau social réservé aux femmes&nbsp;·&nbsp;Bénin</p>
+      <h1>Ici, c’est entre&nbsp;Elles.</h1>
+      <p class="chapeau">Un espace vérifié et sûr pour parler de tout, sans regard ni harcèlement. Pendant la pré-bêta, Ellesia s’ouvre sur invitation.</p>
+
+      <div class="telechargement" data-telechargement>
+        <a class="bouton" data-lien="arm64" href="#installer">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Télécharger pour Android</span>
+        </a>
+        <p class="details">Version 0.1.0 · 19,5 Mo · Android 7 ou plus récent</p>
+        <p class="details secondaire">Téléphone ancien, ou installation refusée&nbsp;? <a data-lien="armv7" href="#installer">Prends cette version (17 Mo)</a>.</p>
+      </div>
+
+      <p class="iphone" data-iphone hidden>Ellesia n’existe pas encore sur iPhone : la pré-bêta se fait sur Android. Elle arrivera sur iPhone après le lancement.</p>
+    </div>
+
+    <!-- Aperçu de l'écran de démarrage de l'application, dessiné en HTML. -->
+    <div class="telephone" aria-hidden="true">
+      <div class="ecran">
+        <span class="anneau-ecran"></span>
+        <svg class="monogramme-ecran"><use href="#monogramme"/></svg>
+        <span class="nom-ecran">Ellesia</span>
+        <span class="slogan-ecran">Ici, c’est entre Elles.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================= L'idée -->
+  <section class="idee apparait">
+    <p class="surtitre">D’où vient l’idée</p>
+    <h2>On se parle déjà entre femmes. <em>Rarement en sécurité.</em></h2>
+    <ol class="constats">
+      <li><span>01</span><p>Nos groupes WhatsApp et Facebook débordent, mais personne ne les modère vraiment.</p></li>
+      <li><span>02</span><p>Les arnaques et les inconnus s’y glissent sans qu’on le sache.</p></li>
+      <li><span>03</span><p>Alors beaucoup se taisent, par peur d’être reconnues ou harcelées.</p></li>
+    </ol>
+    <p class="conclusion">Ellesia est née de ce constat : un vrai lieu à nous, avec des règles qui nous protègent.</p>
+  </section>
+
+  <!-- ================================================== Anonymat vérifié -->
+  <section class="anonymat apparait">
+    <div class="anonymat-titre">
+      <p class="surtitre">Le cœur d’Ellesia</p>
+      <h2>Toutes vérifiées. <span>Pas forcément reconnues.</span></h2>
+    </div>
+    <div class="anonymat-corps">
+      <p>Ellesia sait que tu es une vraie femme. Les autres ne voient que ton pseudonyme, et seulement ce que tu choisis de montrer.</p>
+      <ul class="atouts">
+        <li><strong>Publier en anonyme</strong><span>Ni pseudo ni photo : ton histoire, sans ton nom.</span></li>
+        <li><strong>Sujets sensibles</strong><span>La capture d’écran est bloquée sur ce que tu confies.</span></li>
+        <li><strong>Publications éphémères</strong><span>Elles disparaissent d’elles-mêmes après 24 h ou 7 jours.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================================================== Ce qui t'attend -->
+  <section class="espaces apparait">
+    <p class="surtitre">Ce qui t’attend</p>
+    <h2>Un espace à toi, du fil au journal intime.</h2>
+    <ul class="themes" aria-label="Les thèmes du fil">
+      <li class="fort">Vécu</li><li>Santé &amp; bien-être</li><li>Maternité</li><li>Couple &amp; famille</li>
+      <li class="ocre">Études</li><li>Carrière &amp; business</li><li>Beauté &amp; style</li>
+      <li>Foi &amp; spiritualité</li><li class="fort">Entraide</li>
+    </ul>
+    <dl class="liste-espaces">
+      <div><dt>Le fil</dt><dd>« Pour toi » ou « Abonnements », filtré par thème.</dd></div>
+      <div><dt>Cinq réactions</dt><dd>J’aime, Soutien, Force, Merci, Rire.</dd></div>
+      <div><dt>Les salons</dt><dd>Des discussions en direct, sur demande d’accès.</dd></div>
+      <div><dt>Ton journal</dt><dd>Privé et chiffré : toi seule peux le lire.</dd></div>
+      <div><dt>Tes collections</dt><dd>Les publications que tu enregistres, rangées à ta façon.</dd></div>
+    </dl>
+  </section>
+
+  <!-- ============================================================ Sécurité -->
+  <section class="securite apparait">
+    <p class="surtitre">Ta sécurité d’abord</p>
+    <h2>Ici, c’est toi qui gardes la main.</h2>
+    <ul class="garanties">
+      <li><strong>Sortie rapide</strong><span>Un geste, et Ellesia disparaît aussitôt.</span></li>
+      <li><strong>Verrouillage</strong><span>Par ton empreinte ou le code de ton téléphone.</span></li>
+      <li><strong>Blocage total</strong><span>Elle ne te voit plus, nulle part dans l’application.</span></li>
+      <li><strong>Signalement</strong><span>Chaque signalement est lu et traité par une personne.</span></li>
+      <li><strong>Numéros d’aide</strong><span>Les urgences du Bénin, vérifiées, à portée de main.</span></li>
+      <li><strong>Notifications discrètes</strong><span>Rien de ce qui te concerne sur l’écran verrouillé.</span></li>
+    </ul>
+  </section>
+
+  <!-- ========================================================== Installer -->
+  <section class="installer apparait" id="installer">
+    <p class="surtitre">Installer Ellesia</p>
+    <h2>Quatre étapes, cinq minutes.</h2>
+    <ol class="etapes">
+      <li>
+        <strong>Télécharge le fichier</strong>
+        <span>Avec le bouton ci-dessous. Ton navigateur peut te prévenir que ce type de fichier peut être dangereux : c’est le message habituel pour une application qui n’est pas encore sur le Play Store.</span>
+      </li>
+      <li>
+        <strong>Ouvre-le et autorise l’installation</strong>
+        <span>Android te demande d’autoriser ton navigateur, ou WhatsApp, à installer des applications. Accepte, puis touche « Installer ».</span>
+      </li>
+      <li>
+        <strong>Lis et accepte la charte</strong>
+        <span>La charte et la politique de confidentialité s’affichent au premier lancement.</span>
+      </li>
+      <li>
+        <strong>Entre ton code d’invitation</strong>
+        <span>Celui que tu as reçu dans le groupe. Sans code, tu peux rejoindre la liste d’attente.</span>
+      </li>
+    </ol>
+
+    <div class="telechargement" data-telechargement>
+      <a class="bouton" data-lien="arm64" href="#installer">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Télécharger pour Android</span>
+      </a>
+      <p class="details secondaire">Téléphone ancien, ou installation refusée&nbsp;? <a data-lien="armv7" href="#installer">Prends cette version (17 Mo)</a>.</p>
+    </div>
+    <p class="iphone" data-iphone hidden>Ces étapes valent pour Android. Sur iPhone, Ellesia arrivera après le lancement.</p>
+
+    <p class="note">Pendant la pré-bêta, l’étape de vérification d’identité est simulée : on ne te demandera pas ta pièce. La vraie vérification arrivera pour le lancement.</p>
+  </section>
+</main>
+
+<footer class="pied">
+  <span class="badge"><svg aria-hidden="true"><use href="#monogramme"/></svg></span>
+  <p class="pied-slogan">Ici, c’est entre Elles.</p>
+  <p>Pré-bêta privée, sur invitation · © 2026 Ellesia</p>
+</footer>
+
+</body>
+</html>
