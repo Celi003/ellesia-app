@@ -14,7 +14,7 @@
  */
 const FICHIERS_DRIVE = {
   arm64: '134nwKjZPq4TjsCKxpcX9WqRuP1MBKjzu',
-  armv7: null,
+  armv7: '1aqiOK6F6AqSEBciPACnP5Oaz6CTMrpBz',
 };
 
 const lienDirect = (identifiant) =>
